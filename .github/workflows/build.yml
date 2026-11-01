@@ -5,6 +5,9 @@ on:
     branches: [ main ]
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -13,19 +16,23 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up JDK 21
-        uses: actions/setup-java@v4
+      - name: Set up Java 25
+        uses: actions/setup-java@v6
         with:
-          java-version: '21'
-          distribution: ' temurin'
+          distribution: temurin
+          java-version: '25'
 
-      - name: Build with Gradle
-        run: |
-          chmod +x gradlew
-          ./gradlew build
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '9.4.0'
+
+      - name: Build mod
+        run: gradle build --no-daemon
 
       - name: Upload mod
         uses: actions/upload-artifact@v4
         with:
           name: custom-end-credits
           path: build/libs/*.jar
+          if-no-files-found: error
