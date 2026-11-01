@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "id": "custom_end_credits",
+  "version": "${version}",
+  "name": "Custom End Credits",
+  "description": "Replaces the Minecraft End credits with a custom video and music.",
+  "authors": [
+    "LoreCrac"
+  ],
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "com.lorecrac.customendcredits.CustomEndCredits"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.19.5",
+    "minecraft": "26.1.2",
+    "java": ">=25",
+    "fabric-api": "*"
+  }
+}
